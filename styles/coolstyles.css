@@ -1,0 +1,163 @@
+main {
+	display: grid;
+	grid-template-columns: repeat(5, 80px);
+	grid-template-rows: 80px 80px 25px;
+    gap: 10px;
+}
+
+.grid-blue,
+.grid-green {
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.grid-blue {
+	width: 80px;
+	height: 80px;
+	background-color: lightblue;
+}
+
+.grid-green {
+	width: 80px;
+	height: 25px;
+	background-color: lightgreen;
+}
+
+.grid-start {
+	grid-column-start: 2;
+}
+
+
+/*************************
+    TRANSFORMS
+*************************/
+
+main div:nth-child(2){
+    transform: translate(25px, 25px);
+    /* translate: X is horizontal; - value move to the left, + value move to the right
+    Y is vertical; - value move up, + values move down
+    Z is "3d"; - value move the object "away" (make it smaller), + values
+    move it "toward" (make it bigger) */
+}
+
+main div:nth-child(3){
+    transform:rotate(30deg);
+    /* 360 degrees in a circle - if you rotate 360deg, the element will be back
+    where it started */
+}
+
+main div:nth-child(4){
+    transform: scale(2, 0.5);
+    /* scale(2, 0.5) will make the object twice as wide, but half as tall 
+    - value will scale and flip the object */
+}
+
+main div:nth-child(5){
+    transform: skew(-40deg, 15deg);
+    /* skew is measured in degrees, and distorts the element
+    X is horizontal, Y is vertical */
+}
+
+
+main div:nth-child(7){
+    /* don't put the transition on the hover state, or it won't run when the user
+    move the cursor off the element */
+
+    transition-property: background-color;
+    /* transition-property tells the browser what to animate */
+    transition-duration: 1s;
+    /* transition-duration tells the browser how long the animation lasts */
+}
+
+main div:nth-child(7):hover{
+    /* transition allow you to animate (almost) any CSS property */
+    background-color:chocolate;    
+}
+
+main div:nth-child(8){
+    transition-property: transform;
+    transition-duration: 1500ms; /* 1500ms = 1.5s */
+}
+
+main div:nth-child(8):hover{
+    transform: rotate(1080deg);
+}
+
+main div:nth-child(9){
+    /* you can use transition:all to do any property that changes - transition
+    is shorthand that includes property, duration, and any other transition value */
+    transition:all 2s;
+}
+
+main div:nth-child(9):hover{
+    font-size:24px;
+    color:blueviolet;
+    border:3px solid black;
+    transform: scale(1.5, 1.5);
+}
+
+/* Keyframes (or CSS animation) has two parts - you have to create the instruction
+for the animation using @keyframes, and then you call the animation by name
+on an element */
+
+@keyframes bounce{
+    /* inside @keyframes, you set the instructions for how the animation will run,
+    or what should happen at each keyframe 
+    ...if you don't enter a value for 0% or 100%, the animation will use
+    whatever style the element already has */
+
+    7%{
+        transform:scaleY(0.9) translateY(0);
+        transform-origin:bottom; /* so the scale happens from the bottom,
+        not the center */
+    }
+
+    10%{
+        transform:scaleY(1);
+        transform-origin:bottom; /* so the scale happens from the bottom,
+        not the center */
+    }
+    
+    50%{
+        transform: translateY(-50px);
+    }
+
+
+}
+
+main div:nth-child(10){
+    /* call the animation by name, and tell it how to run... */
+    animation-name: bounce;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+
+/*****************************
+        BTN animation
+*****************************/
+
+.btn{
+    text-align:center;
+    border-radius:5px;
+    background-color: hsl(121, 52%, 57%);
+    /* hsl stand for Hue, Saturation, Luminosity...
+        Hue: your position on the colour wheel (reds, blues, etc.)
+        Saturation: how much "grey" is in the colour
+        Luminosity: how bright or vibrant the colour is
+    */
+    border:2px solid hsl(121, 52%, 27%);
+    color:hsl(121, 52%, 37%);
+    padding:2px;
+
+    cursor:pointer;
+
+    /* transition so any change animates */
+    transition:all 600ms ease;
+}
+
+.btn:hover, .btn:focus, .btn:active{
+    background-color: hsl(121, 52%, 77%);
+    border:2px solid hsl(121, 52%, 47%);
+    transform: scale(1.1);
+}
